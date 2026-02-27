@@ -41,3 +41,19 @@ The system manages user accounts, secure registration flows, and automated trans
 | **Deployment** | Railway (CI/CD) |
 | **Email Service** | Mailtrap |
 | **API Documentation** | OpenAPI 3 / Swagger UI |
+
+## 📸 UI Preview
+*Responsive design works across all your devices.*
+
+| Mobile |                                  Desktop                                   |
+| :---: |:--------------------------------------------------------------------------:|
+| <img src="src/main/resources/static/images/login_mobile.png" width="200"> | <img src="src/main/resources/static/images/login_desktop.png" width="600"> |
+| <img src="src/main/resources/static/images/dashboard_mobile.png" width="200" alt="Mobile Dashboard"/> | <img src="src/main/resources/static/images/dashboard_desktop.png" width="600" alt="Desktop Dashboard"/> |
+---
+
+## Interactive API Documentation
+*Explore and test the IceBank API endpoints in real-time.*
+
+<p>
+  <img src="src/main/resources/static/images/swagger_ui.png" width="800" alt="Swagger UI Documentation"/>
+</p>
