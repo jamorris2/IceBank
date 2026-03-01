@@ -30,11 +30,11 @@ public class WelcomeLogger implements CommandLineRunner {
                 ----------------------------------------------------------
                   BANKING APP IS LIVE!
                   URL: %s
-                """.formatted(baseUrl));
+                  Swagger: %s/swagger-ui/index.html
+                """.formatted(baseUrl, baseUrl));
 
         if (isLocal) {
             message.append("""
-                  Swagger: %s/swagger-ui/index.html
                   H2 Console: %s/h2-console
                   SELECT * FROM ACCOUNT;
                   DELETE FROM ACCOUNT;

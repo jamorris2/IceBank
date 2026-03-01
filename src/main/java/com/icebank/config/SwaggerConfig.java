@@ -11,8 +11,8 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
-                .info(new Info().title("Bank Account API")
+                .info(new Info().title("IceBank API")
                         .version("1.0")
-                        .description("API to test CRUD Bank Account | Tech with Bansikah"));
+                        .description("API to test CRUD Bank Account"));
     }
 }
