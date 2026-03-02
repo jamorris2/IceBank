@@ -5,30 +5,27 @@ import com.icebank.model.AccountRequestDTO;
 import com.icebank.service.AccountService;
 import com.icebank.service.EmailService;
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
 import java.util.UUID;
 
 @Controller
 @Slf4j
+@RequiredArgsConstructor
 public class AuthController {
 
-    @Autowired
-    private AccountService accountService;
-
-    @Autowired
-    private EmailService emailService;
-
-    @Autowired
-    private org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
+    private final AccountService accountService;
+    private final EmailService emailService;
+    private final PasswordEncoder passwordEncoder;
 
     @GetMapping("/")
     public String index() {

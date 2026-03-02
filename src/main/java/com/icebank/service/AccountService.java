@@ -3,7 +3,7 @@ package com.icebank.service;
 import com.icebank.model.Account;
 import com.icebank.model.AccountRequestDTO;
 import com.icebank.repository.AccountRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,10 +14,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class AccountService implements UserDetailsService {
 
-    @Autowired
-    private AccountRepository accountRepository;
+    private final AccountRepository accountRepository;
 
     public List<Account> getAllAccounts() {
         return accountRepository.findAll();

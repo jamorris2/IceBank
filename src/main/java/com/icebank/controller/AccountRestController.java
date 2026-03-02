@@ -4,18 +4,18 @@ import com.icebank.model.Account;
 import com.icebank.model.AccountRequestDTO;
 import com.icebank.service.AccountService;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/accounts")
 public class AccountRestController {
 
-    @Autowired
-    private AccountService accountService;
+    private final AccountService accountService;
 
     @GetMapping
     public List<Account> getAllAccounts() {
