@@ -50,9 +50,11 @@ public class AuthController {
             accountService.registerAccount(dto);
             return "redirect:/login?status=account-created";
         } catch (UserAlreadyExistsException e) {
+            log.warn("Signup failed: Email {} already exists", dto.getEmail());
             model.addAttribute("status", "email-exists");
             return "signup";
         } catch (Exception e) {
+            log.error("Unexpected error during signup for email: {}", dto.getEmail(), e);
             model.addAttribute("status", "signup-failed");
             return "signup";
         }
@@ -87,7 +89,7 @@ public class AuthController {
     @PostMapping("/forgot-password")
     public String resetPassword(@RequestParam("emailAddress") String userEmail) {
         Optional<Account> accountOpt = accountService.findByEmail(userEmail);
-        if (!accountOpt.isPresent()) return "redirect:/login?status=reset-password-sent";
+        if (accountOpt.isEmpty()) return "redirect:/login?status=reset-password-sent";
 
         Account account = accountOpt.get();
         String token = UUID.randomUUID().toString();
@@ -98,6 +100,7 @@ public class AuthController {
             accountService.saveAccount(account);
             return "redirect:/login?status=reset-password-sent";
         } catch (Exception e) {
+            log.warn("Could not reset password: {}", String.valueOf(e));
             return "redirect:/forgot-password?status=error";
         }
     }
@@ -112,7 +115,7 @@ public class AuthController {
     public String handlePasswordReset(@RequestParam("token") String token,
                                       @RequestParam("password") String newPassword) {
         Optional<Account> accountOpt = accountService.findByResetPasswordToken(token);
-        if (!accountOpt.isPresent()) return "redirect:/login?status=reset-password-error";
+        if (accountOpt.isEmpty()) return "redirect:/login?status=reset-password-error";
 
         Account account = accountOpt.get();
         try {
@@ -121,6 +124,7 @@ public class AuthController {
             accountService.saveAccount(account);
             return "redirect:/login?status=password-change-success";
         } catch (Exception e) {
+            log.error("Critical error during password reset for email: {}", account.getEmail(), e);
             return "redirect:/login?status=reset-password-error";
         }
     }
