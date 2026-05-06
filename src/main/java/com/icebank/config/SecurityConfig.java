@@ -23,6 +23,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                // Handles Authorization:
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/",
@@ -42,9 +43,11 @@ public class SecurityConfig {
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
+
+                // Handles Authentication:
                 .formLogin(login -> login
-                        .loginPage("/login")
-                        .loginProcessingUrl("/processLogin")
+                        .loginPage("/login")  // sets the default page the user sees when they try to access an endpoint when authentication is required and the user isn't authorized
+                        .loginProcessingUrl("/processLogin")  // Sets the /processLogin url as the endpoint (to handle Post requests) that gets hit when a user tries to login
                         .usernameParameter("emailAddress")
                         .passwordParameter("password")
                         .defaultSuccessUrl("/dashboard", true)

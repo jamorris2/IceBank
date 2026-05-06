@@ -34,10 +34,12 @@ public class WelcomeLogger implements CommandLineRunner {
                 """.formatted(baseUrl, baseUrl));
 
         if (isLocal) {
-            message.append("""
-                  H2 Console: %s/h2-console
-                  SELECT * FROM ACCOUNT;
-                  DELETE FROM ACCOUNT;
+            message.append("""                  
+                  To start Database: docker compose up -d postgres
+                  Stop and remove containers: docker compose down
+                  To read accounts in DB:
+                      docker exec -it icebank-postgres psql -U postgres -d icebank
+                      SELECT * FROM account;
                 """.formatted(baseUrl, baseUrl));
         }
 
